@@ -8,7 +8,7 @@
   
 </template>
 
-<style lang="scss">
+<style leng="scss">
 @use './styles/general.scss';
 
 </style>
