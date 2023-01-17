@@ -30,21 +30,26 @@
             },
             getFlag(value) {
                 let lang = '';
-                switch (value.original_language) {
-                    case 'ja':
-                        lang = 'jp'
-                        break;
-
-                    case 'en':
-                        lang = 'gb'   
-                        break; 
                 
-                    default:
-                        lang = (value.original_language)
-                        break;
+                if(value.original_language) {
+
+                    switch (value.original_language) {
+                        case 'ja':
+                            lang = 'jp'
+                            break;
+    
+                        case 'en':
+                            lang = 'gb'   
+                            break; 
+                    
+                        default:
+                            lang = (value.original_language)
+                            break;
+                    }
+    
+                    let url = lang.toUpperCase()
+                    return url
                 }
-                let url = lang.toUpperCase()
-                return url
             }
         }
     }
