@@ -1,6 +1,18 @@
 <script>
-    export default {
+    import { store } from '../store.js';
 
+    // components
+    import AppContent from './AppContent.vue';
+    
+    export default {
+        components: {
+            AppContent,
+        },
+        data() {
+            return {
+                store,
+            }
+        },
     }
 </script>
 
@@ -10,9 +22,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <div class="card border-0">
+                        <div class="mycard">
                             <ul>
-                                <li></li>
+                                <li v-for="(value, index) in store.cards" :key="index">
+                                    <AppContent :element="value"/>
+                                </li>
                             </ul>
                         </div>
                     </div>

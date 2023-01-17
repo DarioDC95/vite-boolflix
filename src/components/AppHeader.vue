@@ -1,6 +1,10 @@
 <script>
     export default {
-
+        data() {
+            return {
+                newSearch: ''
+            }
+        },
     }
 </script>
 
@@ -16,8 +20,8 @@
                 <div class="col-6">
                     <div class="card border-0">
                         <div class="input-group">
-                            <input class="form-control" placeholder="inserisci il titolo che vuoi ricercare" type="text">
-                            <button class="btn btn-outline-secondary">Cerca</button>
+                            <input class="form-control" placeholder="inserisci il titolo che vuoi ricercare" type="text" v-model="newSearch">
+                            <button @click="$emit('searching', newSearch)" class="btn btn-outline-secondary">Cerca</button>
                         </div>
                     </div>
                 </div>
