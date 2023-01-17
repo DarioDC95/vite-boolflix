@@ -24,7 +24,7 @@
                     <div class="col">
                         <div class="mycard">
                             <ul>
-                                <li v-for="(value, index) in store.cards" :key="index">
+                                <li class="me-3" v-for="(value, index) in store.cards" :key="index">
                                     <AppContent :element="value"/>
                                 </li>
                             </ul>
@@ -39,5 +39,8 @@
 <style scoped lang="scss">
     ul {
         list-style-type: none;
+        padding: 0;
+        display: flex;
+        overflow-x: scroll;
     }
 </style>
