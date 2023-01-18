@@ -23,7 +23,10 @@
     methods: {
       getcards() {
         axios.get(`${store.url_movies}${store.search}`).then((response) => {
-          store.cards = response.data.results
+          let provisionCard = response.data.results;
+          store.cards = provisionCard.filter(Object => {
+            return Object.media_type != 'person'
+          })
         })
       },
       changeSearch( newvalue ) {

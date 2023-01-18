@@ -41,6 +41,10 @@
                         case 'en':
                             lang = 'gb'   
                             break; 
+
+                        case 'ko':
+                            lang = 'kr'   
+                            break; 
                     
                         default:
                             lang = (value.original_language)
@@ -50,7 +54,13 @@
                     let url = lang.toUpperCase()
                     return url
                 }
-            }
+            },
+            getStars(value) {
+                let vote = Math.round((value.vote_average) / 2);
+                console.log(vote);
+
+
+            },
         }
     }
 </script>
@@ -58,10 +68,14 @@
     <div class="card rounded-top-0">
         <img :src="image(element)" :alt="title(element)">
         <div class="description">
+            <div>Tipologia: <span class="fs-5 fw-semibold">{{ element.media_type }}</span></div>
             <div>Titolo: <span class="fs-5 fw-semibold">{{ title(element) }}</span></div>
             <div>Titolo originale: <span class="fs-5 fw-semibold">{{ original_title(element) }}</span></div>
             <div>Lingua: <img :src="`https://flagsapi.com/${getFlag(element)}/shiny/64.png`" :alt="element.original_language"></div>
             <div>Voto: <span class="fs-5 fw-semibold">{{ element.vote_average }}</span></div>
+            <div>{{ getStars(element) }}</div>
+            <font-awesome-icon icon="fa-regular fa-star" />
+            <font-awesome-icon icon="fa-solid fa-star" />
         </div>
     </div>
 </template>
