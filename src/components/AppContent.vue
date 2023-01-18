@@ -31,7 +31,7 @@
             },
             description(value) {
                 let text = value.overview;
-                let textOk = text.substring(0, 300) + '...';
+                let textOk = text.substring(0, 250) + '...';
                 return textOk
             },
             getFlag(value) {
