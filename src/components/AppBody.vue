@@ -23,6 +23,13 @@
                 <div class="row">
                     <div class="col">
                         <div class="mycard">
+                            <h2 class="m-0 mt-4">ORIGINALI NETFLIX</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="mycard">
                             <ul>
                                 <li class="me-3" v-for="(value, index) in store.cards" :key="index">
                                     <AppContent :element="value"/>
@@ -40,13 +47,19 @@
     @use '../styles/partials/variables.scss'as *;
 
     main {
-        padding: 50px 0;
+        flex-grow: 1;
         height: 100%;
         background-color: $bg-brown;
+        padding-left: 20px;
+
+        h2 {
+            color: $color-white;
+        }
         
         ul {
             list-style-type: none;
             padding: 0;
+            margin: 0;
             display: flex;
             overflow-x: scroll;
         }

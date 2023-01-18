@@ -48,9 +48,11 @@
 
     header {
         background-color: $bg-black;
+        padding-left: 20px;
 
         img {
             width: 200px;
+            margin-left: -20px;
         }
 
         .card {
