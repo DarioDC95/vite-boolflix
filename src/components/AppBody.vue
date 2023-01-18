@@ -19,7 +19,7 @@
 <template>
     <main>
         <section>
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col">
                         <div class="mycard">
@@ -37,10 +37,18 @@
 </template>
 
 <style scoped lang="scss">
-    ul {
-        list-style-type: none;
-        padding: 0;
-        display: flex;
-        overflow-x: scroll;
+    @use '../styles/partials/variables.scss'as *;
+
+    main {
+        padding: 50px 0;
+        height: 100%;
+        background-color: $bg-brown;
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            overflow-x: scroll;
+        }
     }
 </style>

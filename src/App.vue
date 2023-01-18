@@ -38,11 +38,16 @@
 </script>
 
 <template>
-  <AppHeader @searching="changeSearch"/>
-  <AppBody />
+  <div class="mycontainer-top">
+    <AppHeader @searching="changeSearch"/>
+    <AppBody />
+  </div>
 </template>
 
 <style lang="scss">
-@use './styles/general.scss' as *;
+  @use './styles/general.scss' as *;
 
+  .mycontainer-top {
+    height: 100vh;
+  }
 </style>

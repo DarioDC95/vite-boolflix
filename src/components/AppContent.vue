@@ -29,6 +29,11 @@
             image(value) {
                 return `https://image.tmdb.org/t/p/w300${value.poster_path}`
             },
+            description(value) {
+                let text = value.overview;
+                let textOk = text.substring(0, 300) + '...';
+                return textOk
+            },
             getFlag(value) {
                 let lang = '';
                 
@@ -60,11 +65,11 @@
                 let vote = Math.round((value.vote_average) / 2);
                 let star = [];
                 for(let i = 0; i < vote; i++) {
-                    star.push('fa-solid fa-star')
+                    star.push({icona:'fa-solid fa-star', size:'lg'})
                 }
                 let voteNot = 5 - vote;
                 for(let i = 0; i < voteNot; i++) {
-                    star.push('fa-regular fa-star')
+                    star.push({icona:'fa-regular fa-star', size:'sm'})
                 }
                 return star 
             },
@@ -72,31 +77,36 @@
     }
 </script>
 <template>
-    <div v-if="element.poster_path" class="card">
-        <img :src="image(element)" :alt="title(element)">
-        <div class="description">
-            <div>Tipologia: <span class="fs-5 fw-semibold">{{ type(element) }}</span></div>
-            <div>Titolo: <span class="fs-5 fw-semibold">{{ title(element) }}</span></div>
-            <div>Titolo originale: <span class="fs-5 fw-semibold">{{ original_title(element) }}</span></div>
-            <div>Lingua: <img :src="`https://flagsapi.com/${getFlag(element)}/shiny/64.png`" :alt="element.original_language"></div>
-            <div class="d-flex">
-                <div class="me-2">Voto:</div>
-                <div class="stars d-flex text-warning">
-                    <div v-for="(value, index) in getStars(element)" :key="index"><font-awesome-icon :icon="value"/></div>
+    <div class="py-4 h-100">
+        <div v-if="element.poster_path" class="card border-0">
+            <img :src="image(element)" :alt="title(element)">
+            <div class="description">
+                <div>Type: <span class="fs-6 text-capitalize">{{ type(element) }}</span></div>
+                <div>Titolo: <span class="fs-5 fw-semibold">{{ title(element) }}</span></div>
+                <div v-if="element.original_name != element.name || element.original_title != element.title">Titolo originale: <span class="fs-6 fw-semibold">{{ original_title(element) }}</span></div>
+                <div v-if="element.overview"><span class="text-decoration-underline">Description:</span> <span>{{ description(element) }}</span></div>
+                <div>Lingua: <img :src="`https://flagsapi.com/${getFlag(element)}/shiny/64.png`" :alt="element.original_language"></div>
+                <div class="d-flex">
+                    <div class="align-text-bottom me-2">Voto:</div>
+                    <div class="stars d-flex align-items-end text-warning">
+                        <div class="d-flex align-items-end me-1" v-for="(value, index) in getStars(element)" :key="index"><font-awesome-icon :icon="value.icona" :size="value.size"/></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div v-else class="card sub-card">
-        <div class="description">
-            <div>Tipologia: <span>{{ element.media_type }}</span></div>
-            <div>Titolo: <span class="fs-6 fw-semibold">{{ title(element) }}</span></div>
-            <div>Titolo originale: <span class="fs-6 fw-semibold">{{ original_title(element) }}</span></div>
-            <div>Lingua: <img :src="`https://flagsapi.com/${getFlag(element)}/shiny/64.png`" :alt="element.original_language"></div>
-            <div class="d-flex">
-                <div class="me-2">Voto:</div>
-                <div class="stars d-flex text-warning">
-                    <div v-for="(value, index) in getStars(element)" :key="index"><font-awesome-icon :icon="value"/></div>
+        <div v-else class="card border-0 sub-card">
+            <div class="description">
+                <h5>Immagine non disponibile</h5>
+                <div>Tipologia: <span class="fs-6">{{ element.media_type }}</span></div>
+                <div>Titolo: <span class="fs-5 fw-semibold">{{ title(element) }}</span></div>
+                <div v-if="element.original_name != element.name || element.original_title != element.title">Titolo originale: <span class="fs-6 fw-semibold">{{ original_title(element) }}</span></div>
+                <div v-if="element.overview"><span class="text-decoration-underline">Description:</span> <span>{{ description(element) }}</span></div>
+                <div>Lingua: <img :src="`https://flagsapi.com/${getFlag(element)}/shiny/64.png`" :alt="element.original_language"></div>
+                <div class="d-flex">
+                    <div class="align-text-bottom me-2">Voto:</div>
+                    <div class="stars d-flex text-warning">
+                        <div class="d-flex align-items-end me-1" v-for="(value, index) in getStars(element)" :key="index"><font-awesome-icon :icon="value.icona" :size="value.size"/></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -106,10 +116,12 @@
     @use '../styles/partials/variables' as *;
 
     .card {
-        width: 250px;
-        height: 100%;
+        width: 300px;
+        height: 500px;
         overflow: hidden;
         position: relative;
+        transition: 0.4s ease-out;
+        box-shadow: 0px 0px 10px black;
 
         img {
             height: 100%;
@@ -119,10 +131,19 @@
             position: absolute;
             opacity: 0;
             padding: 20px;
-            background-color: black;
+            background-color: #000000c2;
             width: 100%;
             height: 100%;
             color: $color-white;
+            transition: 0.4s ease-out;
+
+            span {
+                text-shadow: 1px 1px 5px black;
+            }
+        }
+
+        &:hover {
+            transform: translateY(-15px);
         }
 
         &:hover .description {
