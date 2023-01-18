@@ -3,6 +3,11 @@
         props: {
             element: Object,
         },
+        data() {
+            return {
+                stars: [],
+            }
+        },
         methods: {
             title(value) {
                 if(value.media_type == 'tv') {
@@ -58,8 +63,16 @@
             getStars(value) {
                 let vote = Math.round((value.vote_average) / 2);
                 console.log(vote);
-
-
+                let star = [];
+                for(let i = 0; i < vote; i++) {
+                    star.push('fa-solid fa-star')
+                }
+                let voteOK = 5 - vote;
+                for(let i = 0; i < voteOK; i++) {
+                    star.push('fa-regular fa-star')
+                }
+                console.log(star)
+                return star 
             },
         }
     }
@@ -72,10 +85,12 @@
             <div>Titolo: <span class="fs-5 fw-semibold">{{ title(element) }}</span></div>
             <div>Titolo originale: <span class="fs-5 fw-semibold">{{ original_title(element) }}</span></div>
             <div>Lingua: <img :src="`https://flagsapi.com/${getFlag(element)}/shiny/64.png`" :alt="element.original_language"></div>
-            <div>Voto: <span class="fs-5 fw-semibold">{{ element.vote_average }}</span></div>
-            <div>{{ getStars(element) }}</div>
-            <font-awesome-icon icon="fa-regular fa-star" />
-            <font-awesome-icon icon="fa-solid fa-star" />
+            <div class="d-flex">
+                <div class="me-2">Voto:</div>
+                <div class="d-flex text-warning">
+                    <div v-for="(value, index) in getStars(element)" :key="index"><font-awesome-icon :icon="value" /></div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
