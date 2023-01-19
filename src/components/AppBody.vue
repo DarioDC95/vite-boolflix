@@ -26,7 +26,6 @@
                             }
                         }
                     });
-                    console.log(arrayfiltered);
                     return arrayfiltered
                 }
             }

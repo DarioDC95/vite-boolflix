@@ -30,7 +30,6 @@
           store.loading = false;
           axios.get(`${store.url_genres}`).then((response) => {
             let provisionGenres = response.data.genres;
-            console.log(provisionGenres);
             let objectGenres = [];
             for (let i = 0; i < store.cards.length; i++) {
               for (let j = 0; j < store.cards[i].genre_ids.length; j++) {
@@ -41,7 +40,6 @@
                 }
               }
             };
-            console.log(objectGenres);
             store.cards_geners = [];
             for (let i = 0; i < provisionGenres.length; i++) {
               if (objectGenres.includes(provisionGenres[i].id))
