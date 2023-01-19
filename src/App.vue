@@ -28,11 +28,35 @@
             return Object.media_type != 'person'
           });
           store.loading = false;
-        })
+          axios.get(`${store.url_genres}`).then((response) => {
+            let provisionGenres = response.data.genres;
+            console.log(provisionGenres);
+            let objectGenres = [];
+            for (let i = 0; i < store.cards.length; i++) {
+              for (let j = 0; j < store.cards[i].genre_ids.length; j++) {
+                if (store.cards[i].genre_ids.length != 0) {
+                  if (!objectGenres.includes(store.cards[i].genre_ids[j])) {
+                    objectGenres.push(store.cards[i].genre_ids[j])
+                  }
+                }
+              }
+            };
+            console.log(objectGenres);
+            store.cards_geners = [];
+            for (let i = 0; i < provisionGenres.length; i++) {
+              if (objectGenres.includes(provisionGenres[i].id))
+              store.cards_geners.push(provisionGenres[i])
+            }
+          })
+        });
       },
       changeSearch( newvalue ) {
         store.search = newvalue;
+        store.selectedGenre = '';
         this.getcards()
+      },
+      changeSelect(value) {
+        store.selectedGenre = value;
       }
     },
   }
@@ -40,7 +64,7 @@
 
 <template>
   <div class="mycontainer-top">
-    <AppHeader @searching="changeSearch"/>
+    <AppHeader :element="store.cards_geners" @searching="changeSearch" @selecting="changeSelect"/>
     <AppBody />
   </div>
 </template>

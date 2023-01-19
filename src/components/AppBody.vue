@@ -13,6 +13,24 @@
                 store,
             }
         },
+        computed: {
+            arraycards() {
+                if (store.selectedGenre == '') {
+                    return store.cards
+                }
+                else {
+                    let arrayfiltered = store.cards.filter(object => {
+                        for (let i = 0; i < object.genre_ids.length; i++) {
+                            if (object.genre_ids[i] == store.selectedGenre) {
+                                return object
+                            }
+                        }
+                    });
+                    console.log(arrayfiltered);
+                    return arrayfiltered
+                }
+            }
+        }
     }
 </script>
 
@@ -31,7 +49,7 @@
                     <div v-if="store.cards.length !== 0" class="col">
                         <div class="mycard">
                             <ul>
-                                <li class="me-3" v-for="(value, index) in store.cards" :key="index">
+                                <li class="me-3" v-for="(value, index) in arraycards" :key="index">
                                     <AppContent :element="value"/>
                                 </li>
                             </ul>
