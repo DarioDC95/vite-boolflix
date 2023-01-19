@@ -28,13 +28,18 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
+                    <div v-if="store.cards.length !== 0" class="col">
                         <div class="mycard">
                             <ul>
                                 <li class="me-3" v-for="(value, index) in store.cards" :key="index">
                                     <AppContent :element="value"/>
                                 </li>
                             </ul>
+                        </div>
+                    </div>
+                    <div v-else class="col">
+                        <div class="card mt-4 align-items-center justify-content-center">
+                            <h1>NESSUN RISULTATO TROVATO</h1>
                         </div>
                     </div>
                 </div>
@@ -50,7 +55,7 @@
         flex-grow: 1;
         height: 100%;
         background-color: $bg-brown;
-        padding-left: 20px;
+        padding: 0 20px;
 
         h2 {
             color: $color-white;
@@ -62,6 +67,10 @@
             margin: 0;
             display: flex;
             overflow-x: scroll;
+        }
+
+        .card {
+            height: 500px;
         }
     }
 </style>

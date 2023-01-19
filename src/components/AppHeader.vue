@@ -48,7 +48,7 @@
 
     header {
         background-color: $bg-black;
-        padding-left: 20px;
+        padding: 0 20px;
 
         img {
             width: 200px;
@@ -59,7 +59,7 @@
             background-color: transparent;
 
             .buttonSearch {
-                margin-right: 0.50rem;
+                margin-right: 0.75rem;
                 padding: 4px 10px;
                 border-radius: 8px;
                 background-color: transparent;
