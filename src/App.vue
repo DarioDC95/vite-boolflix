@@ -26,7 +26,8 @@
           let provisionCard = response.data.results;
           store.cards = provisionCard.filter(Object => {
             return Object.media_type != 'person'
-          })
+          });
+          store.loading = false;
         })
       },
       changeSearch( newvalue ) {

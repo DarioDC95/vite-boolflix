@@ -37,7 +37,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div v-else class="col">
+                    <div v-if="store.cards.length === 0 && store.loading == false" class="col">
                         <div class="card mt-4 align-items-center justify-content-center">
                             <h1>NESSUN RISULTATO TROVATO</h1>
                         </div>
