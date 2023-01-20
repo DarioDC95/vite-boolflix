@@ -51,10 +51,12 @@
       changeSearch( newvalue ) {
         store.search = newvalue;
         store.selectedGenre = '';
+        store.activeBackdrop = 0;
         this.getcards()
       },
       changeSelect(value) {
         store.selectedGenre = value;
+        store.activeBackdrop = 0;
       }
     },
   }
@@ -62,7 +64,7 @@
 
 <template>
   <div class="mycontainer-top">
-    <AppHeader :element="store.cards_geners" @searching="changeSearch" @selecting="changeSelect"/>
+    <AppHeader :active="store.activeBackdrop" :element="store.cards_geners" @searching="changeSearch" @selecting="changeSelect"/>
     <AppBody />
   </div>
 </template>

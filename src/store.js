@@ -6,6 +6,7 @@ export const store = reactive({
     cards_geners: [],
     cards: [],
     selectedGenre: '',
+    activeBackdrop: 0,
     loading: true,
     search: 'mononoke',
 })

@@ -18,7 +18,7 @@
                 if(this.newSearch != '' && this.newSearch.replace(/\s/g, '').length != 0) {
                     this.$emit('searching', this.newSearch);
                     this.newSearch = '';
-                    this.selected = ''
+                    this.selected = '';
                 }
                 else {
                     this.newSearch = ''
