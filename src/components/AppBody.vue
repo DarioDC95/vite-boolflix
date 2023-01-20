@@ -85,15 +85,15 @@
                 <div class="row">
                     <div class="col p-0">
                         <div v-if="store.loading == false" class="mycard-backimg">
-                            <img :src="backImage(store.cards[activeBackdrop])" :alt="store.cards[activeBackdrop]">
-                            <div v-if="store.cards[activeBackdrop].backdrop_path" class="description">
-                                <h1 class="mb-2">{{ getBackTitle(store.cards[activeBackdrop]) }}</h1>
-                                <div class="mb-5 fs-4">{{ backType(store.cards[activeBackdrop]) }}</div>
-                                <p class="fs-4 mb-4">{{ store.cards[activeBackdrop].overview }}</p>
+                            <img :src="backImage(arraycards[activeBackdrop])" :alt="store.cards[activeBackdrop]">
+                            <div v-if="arraycards[activeBackdrop].backdrop_path" class="description">
+                                <h1 class="mb-2">{{ getBackTitle(arraycards[activeBackdrop]) }}</h1>
+                                <div class="mb-5 fs-4">{{ backType(arraycards[activeBackdrop]) }}</div>
+                                <p class="fs-4 mb-4">{{ arraycards[activeBackdrop].overview }}</p>
                                 <div class="d-flex">
                                     <div class="align-text-bottom fs-4 me-2">Voto:</div>
                                     <div class="stars d-flex align-items-end text-warning">
-                                        <div class="d-flex align-items-end me-1" v-for="(value, index) in getBackStars(store.cards[activeBackdrop])" :key="index"><font-awesome-icon :icon="value.icona" :size="value.size"/></div>
+                                        <div class="d-flex align-items-end me-1" v-for="(value, index) in getBackStars(arraycards[activeBackdrop])" :key="index"><font-awesome-icon :icon="value.icona" :size="value.size"/></div>
                                     </div>
                                 </div>
                             </div>
