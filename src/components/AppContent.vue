@@ -80,14 +80,14 @@
     <div class="card border-0">
         <img v-if="element.poster_path" :src="image(element)" :alt="title(element)">
         <div class="description" :class="!element.poster_path ? 'active' : ''">
-            <h5 v-if="!element.poster_path">Immagine non disponibile</h5>
+            <h5 v-if="!element.poster_path">Imagecover Not Available</h5>
             <div>Type: <span class="fs-6 text-capitalize">{{ type(element) }}</span></div>
-            <div>Titolo: <span class="fs-5 fw-semibold">{{ title(element) }}</span></div>
-            <div v-if="element.original_name != element.name || element.original_title != element.title">Titolo originale: <span class="fs-6 fw-semibold">{{ original_title(element) }}</span></div>
+            <div>Title: <span class="fs-5 fw-semibold">{{ title(element) }}</span></div>
+            <div v-if="element.original_name != element.name || element.original_title != element.title">Original title: <span class="fs-6 fw-semibold">{{ original_title(element) }}</span></div>
             <div v-if="element.overview"><span class="text-decoration-underline">Description:</span> <span>{{ description(element) }}</span></div>
-            <div>Lingua: <img :src="`https://flagsapi.com/${getFlag(element)}/shiny/64.png`" :alt="element.original_language"></div>
+            <div>Language: <img :src="`https://flagsapi.com/${getFlag(element)}/shiny/64.png`" :alt="element.original_language"></div>
             <div class="d-flex">
-                <div class="align-text-bottom me-2">Voto:</div>
+                <div class="align-text-bottom me-2">Vote:</div>
                 <div class="stars d-flex align-items-end text-warning">
                     <div class="d-flex align-items-end me-1" v-for="(value, index) in getStars(element)" :key="index"><font-awesome-icon :icon="value.icona" :size="value.size"/></div>
                 </div>

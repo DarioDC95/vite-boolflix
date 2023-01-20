@@ -85,12 +85,13 @@
                     <div class="col p-0">
                         <div v-if="store.loading == false" class="mycard-backimg">
                             <img :src="backImage(arraycards[store.activeBackdrop])" :alt="store.cards[store.activeBackdrop]">
-                            <div v-if="arraycards[store.activeBackdrop].backdrop_path" class="description">
+                            <div class="description">
+                                <h1 v-if="!arraycards[store.activeBackdrop].backdrop_path" class="mb-5 text-decoration-underline">Image Not Available</h1>
                                 <h1 class="mb-2">{{ getBackTitle(arraycards[store.activeBackdrop]) }}</h1>
                                 <div class="mb-5 fs-4">{{ backType(arraycards[store.activeBackdrop]) }}</div>
                                 <p class="fs-4 mb-4">{{ arraycards[store.activeBackdrop].overview }}</p>
                                 <div class="d-flex">
-                                    <div class="align-text-bottom fs-4 me-2">Voto:</div>
+                                    <div class="align-text-bottom fs-4 me-2">Vote:</div>
                                     <div class="stars d-flex align-items-end text-warning">
                                         <div class="d-flex align-items-end me-1" v-for="(value, index) in getBackStars(arraycards[store.activeBackdrop])" :key="index"><font-awesome-icon :icon="value.icona" :size="value.size"/></div>
                                     </div>
@@ -104,7 +105,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="mycard">
-                                    <h2 class="m-0 mt-4">ORIGINALI NETFLIX</h2>
+                                    <h2 class="m-0 mt-4">NETFLIX ORIGINALS</h2>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +121,7 @@
                             </div>
                             <div v-if="store.cards.length === 0 && store.loading == false" class="col">
                                 <div class="card mt-4 align-items-center justify-content-center">
-                                    <h1>NESSUN RISULTATO TROVATO</h1>
+                                    <h1>SEARCH NOT FOUND</h1>
                                 </div>
                             </div>
                         </div>

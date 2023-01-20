@@ -50,7 +50,7 @@
                         </div>
                         <div>
                             <button @click="clickSearch()" class="buttonSearch"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></button>
-                            <input @keyup.enter="clickSearch()" class="input-search" placeholder="inserisci il titolo che vuoi ricercare" type="text" v-model="newSearch">
+                            <input @keyup.enter="clickSearch()" class="input-search" placeholder="type the title you want to search" type="text" v-model="newSearch">
                         </div>
                     </div>
                 </div>
