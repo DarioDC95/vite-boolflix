@@ -150,6 +150,7 @@
             }
 
             .description {
+                width: 100%;
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -159,7 +160,7 @@
                 text-shadow: 5px 1px 10px black;
 
                 p {
-                    width: 70%;
+                    width: 65%;
                 }
             }
         }
