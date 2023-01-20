@@ -71,7 +71,6 @@
   @use './styles/general.scss' as *;
 
   .mycontainer-top {
-    height: 100vh;
     display: flex;
     flex-direction: column;
   }

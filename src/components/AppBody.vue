@@ -11,6 +11,7 @@
         data() {
             return {
                 store,
+                activeBackdrop: 0,
             }
         },
         computed: {
@@ -29,6 +30,50 @@
                     return arrayfiltered
                 }
             }
+        },
+        methods: {
+            backImage(value) {
+                if (value.backdrop_path) {
+                    return `https://image.tmdb.org/t/p/original${value.backdrop_path}`
+                }
+                else {
+                    return "/netflix-monthly-releases.jpg"
+                }
+            },
+            getActiveBackdrop(value) {
+                this.activeBackdrop = value;
+            },
+            getBackTitle(value) {
+                if(value.media_type == 'tv') {
+                    return value.name
+                }
+                else {
+                    return value.title
+                }
+            },
+            backType(value) {
+                if (value.media_type == 'tv') {
+                    return 'tv-series'
+                }
+                return value.media_type
+            },
+            getBackDescription(value) {
+                let text = value.overview;
+                let textOk = text.substring(0, 1000) + '...';
+                return textOk
+            },
+            getBackStars(value) {
+                let vote = Math.round((value.vote_average) / 2);
+                let star = [];
+                for(let i = 0; i < vote; i++) {
+                    star.push({icona:'fa-solid fa-star', size:'2x'})
+                }
+                let voteNot = 5 - vote;
+                for(let i = 0; i < voteNot; i++) {
+                    star.push({icona:'fa-regular fa-star', size:'1x'})
+                }
+                return star
+            },
         }
     }
 </script>
@@ -38,25 +83,47 @@
         <section>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col">
-                        <div class="mycard">
-                            <h2 class="m-0 mt-4">ORIGINALI NETFLIX</h2>
+                    <div class="col p-0">
+                        <div v-if="store.loading == false" class="mycard-backimg">
+                            <img :src="backImage(store.cards[activeBackdrop])" :alt="store.cards[activeBackdrop]">
+                            <div v-if="store.cards[activeBackdrop].backdrop_path" class="description">
+                                <h1 class="mb-2">{{ getBackTitle(store.cards[activeBackdrop]) }}</h1>
+                                <div class="mb-5 fs-4">{{ backType(store.cards[activeBackdrop]) }}</div>
+                                <p class="fs-4 mb-4">{{ store.cards[activeBackdrop].overview }}</p>
+                                <div class="d-flex">
+                                    <div class="align-text-bottom fs-4 me-2">Voto:</div>
+                                    <div class="stars d-flex align-items-end text-warning">
+                                        <div class="d-flex align-items-end me-1" v-for="(value, index) in getBackStars(store.cards[activeBackdrop])" :key="index"><font-awesome-icon :icon="value.icona" :size="value.size"/></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div v-if="store.cards.length !== 0" class="col">
-                        <div class="mycard">
-                            <ul>
-                                <li class="me-3" v-for="(value, index) in arraycards" :key="index">
-                                    <AppContent :element="value"/>
-                                </li>
-                            </ul>
+                <div class="row content">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <div class="mycard">
+                                    <h2 class="m-0 mt-4">ORIGINALI NETFLIX</h2>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div v-if="store.cards.length === 0 && store.loading == false" class="col">
-                        <div class="card mt-4 align-items-center justify-content-center">
-                            <h1>NESSUN RISULTATO TROVATO</h1>
+                        <div class="row">
+                            <div v-if="store.cards.length !== 0" class="col">
+                                <div class="mycard">
+                                    <ul>
+                                        <li v-for="(value, index) in arraycards" :key="index" @mouseover="getActiveBackdrop(index)" class="me-3">
+                                            <AppContent :element="value"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div v-if="store.cards.length === 0 && store.loading == false" class="col">
+                                <div class="card mt-4 align-items-center justify-content-center">
+                                    <h1>NESSUN RISULTATO TROVATO</h1>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -72,22 +139,63 @@
         flex-grow: 1;
         height: 100%;
         background-color: $bg-brown;
-        padding: 0 20px;
 
-        h2 {
-            color: $color-white;
-        }
-        
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            overflow-x: scroll;
+        .mycard-backimg {
+            height: 800px;
+            position: relative;
+            overflow: hidden;
+            
+            img {
+                width: 100%;
+                border-radius: 0px 0px 10px 10px;
+            }
+
+            .description {
+                position: absolute;
+                top: 0;
+                left: 0;
+                padding: 50px 50px;
+                color: $color-white;
+                background: linear-gradient(rgba(0,0,0,64%) 60%, rgba(0,0,0,50%) 80%, transparent 100%);
+                text-shadow: 5px 1px 10px black;
+
+                p {
+                    width: 70%;
+                }
+            }
         }
 
-        .card {
-            height: 500px;
+        .row.content {
+            margin-top: -200px;
+            position: relative;
+            padding: 0 20px;
+            z-index: 5;
+
+            h2 {
+                display: inline-block;
+                color: $color-white;
+                border-radius: 10px;
+                background: linear-gradient(rgba(0,0,0,50%) 40%, rgba(0,0,0,25%) 80%, transparent 100%);
+                text-shadow: 5px 0px 10px black;
+            }
+            
+            ul {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+                display: flex;
+                overflow-x: scroll;
+    
+                li {
+                    margin-top: 40px;
+                    margin-bottom: 40px;
+                }
+            }
+    
+            .card {
+                height: 500px;
+            }
         }
+
     }
 </style>
