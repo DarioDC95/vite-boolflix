@@ -32,8 +32,13 @@
         },
         methods: {
             backImage(value) {
-                if (value.backdrop_path) {
-                    return `https://image.tmdb.org/t/p/original${value.backdrop_path}`
+                if (store.cards.length !== 0) {
+                    if (value.backdrop_path) {
+                        return `https://image.tmdb.org/t/p/original${value.backdrop_path}`
+                    }
+                    else {
+                        return "/netflix-monthly-releases.jpg"
+                    }
                 }
                 else {
                     return "/netflix-monthly-releases.jpg"
@@ -84,8 +89,11 @@
                 <div class="row">
                     <div class="col p-0">
                         <div v-if="store.loading == false" class="mycard-backimg">
-                            <img :src="backImage(arraycards[store.activeBackdrop])" :alt="store.cards[store.activeBackdrop]">
-                            <div class="description">
+                            <img :src="backImage(arraycards[store.activeBackdrop])" alt="BackImage">
+                            <div v-if="store.cards.length === 0" class="description">
+                                <h1>SEARCH NOT FOUND</h1>
+                            </div>
+                            <div v-else class="description">
                                 <h1 v-if="!arraycards[store.activeBackdrop].backdrop_path" class="mb-5 text-decoration-underline">Image Not Available</h1>
                                 <h1 class="mb-2">{{ getBackTitle(arraycards[store.activeBackdrop]) }}</h1>
                                 <div class="mb-5 fs-4">{{ backType(arraycards[store.activeBackdrop]) }}</div>

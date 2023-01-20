@@ -80,7 +80,7 @@
     <div class="card border-0">
         <img v-if="element.poster_path" :src="image(element)" :alt="title(element)">
         <div class="description" :class="!element.poster_path ? 'active' : ''">
-            <h5 v-if="!element.poster_path">Imagecover Not Available</h5>
+            <h5 v-if="!element.poster_path">Image Not Available</h5>
             <div>Type: <span class="fs-6 text-capitalize">{{ type(element) }}</span></div>
             <div>Title: <span class="fs-5 fw-semibold">{{ title(element) }}</span></div>
             <div v-if="element.original_name != element.name || element.original_title != element.title">Original title: <span class="fs-6 fw-semibold">{{ original_title(element) }}</span></div>
